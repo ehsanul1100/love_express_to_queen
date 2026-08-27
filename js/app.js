@@ -17,13 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
     { title: "৩. রুহানী কাব্যসুধা", id: "chamber-poetry" },
     { title: "৪. মালিকার রূপ ও গুণ", id: "chamber-virtues" },
     { title: "৫. প্রেমের শাহী অলিন্দ", id: "chamber-vault" },
-    { title: "৬. সুলতানের চিরন্তন ওয়াদা", id: "chamber-decree" }
+    { title: "৬. সুলতানের চিরন্তন ওয়াদা", id: "chamber-decree" },
   ];
 
   let currentChapterIndex = 0;
   let isCinematicMode = true;
 
   const chamberElements = document.querySelectorAll(".royal-chamber");
+  const sceneryLayers = document.querySelectorAll(".scenery-layer");
   const stepDots = document.querySelectorAll(".step-dot");
   const prevBtn = document.getElementById("hud-prev-btn");
   const nextBtn = document.getElementById("hud-next-btn");
@@ -39,6 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (index < 0) index = 0;
     if (index >= chapters.length) index = chapters.length - 1;
     currentChapterIndex = index;
+
+    // Update Architectural Scenery Layer
+    sceneryLayers.forEach((layer, idx) => {
+      layer.classList.toggle("scenery-active", idx === currentChapterIndex);
+    });
 
     // Update HUD Dots
     stepDots.forEach((dot, i) => {
@@ -73,7 +79,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ch.classList.add("chamber-active");
       });
       if (chamberElements[currentChapterIndex]) {
-        chamberElements[currentChapterIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+        chamberElements[currentChapterIndex].scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
     }
 
@@ -162,7 +171,10 @@ document.addEventListener("DOMContentLoaded", () => {
           ch.classList.add("chamber-active");
         });
         if (chamberElements[currentChapterIndex]) {
-          chamberElements[currentChapterIndex].scrollIntoView({ behavior: "smooth", block: "start" });
+          chamberElements[currentChapterIndex].scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         }
       }
     });
@@ -172,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const observerOptions = {
     root: null,
     rootMargin: "-20% 0px -50% 0px",
-    threshold: 0.1
+    threshold: 0.1,
   };
 
   const scrollObserver = new IntersectionObserver((entries) => {
@@ -183,6 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const index = chapters.findIndex((ch) => ch.id === id);
         if (index !== -1 && index !== currentChapterIndex) {
           currentChapterIndex = index;
+          sceneryLayers.forEach((layer, idx) => {
+            layer.classList.toggle(
+              "scenery-active",
+              idx === currentChapterIndex,
+            );
+          });
           stepDots.forEach((dot, i) => {
             dot.classList.toggle("active", i === currentChapterIndex);
           });
@@ -190,7 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
             chapterBadgeText.textContent = chapters[currentChapterIndex].title;
           }
           if (prevBtn) prevBtn.disabled = currentChapterIndex === 0;
-          if (nextBtn) nextBtn.disabled = currentChapterIndex === chapters.length - 1;
+          if (nextBtn)
+            nextBtn.disabled = currentChapterIndex === chapters.length - 1;
         }
       }
     });
@@ -200,9 +219,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Keyboard Navigation (Arrow Keys)
   window.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === "PageDown") {
+    if (
+      e.key === "ArrowRight" ||
+      e.key === "ArrowDown" ||
+      e.key === "PageDown"
+    ) {
       nextChapter();
-    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp" || e.key === "PageUp") {
+    } else if (
+      e.key === "ArrowLeft" ||
+      e.key === "ArrowUp" ||
+      e.key === "PageUp"
+    ) {
       prevChapter();
     }
   });
@@ -210,26 +237,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // Touch Swipe Gesture Detection for Mobile
   let touchStartX = 0;
   let touchStartY = 0;
-  window.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY;
-  }, { passive: true });
+  window.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    },
+    { passive: true },
+  );
 
-  window.addEventListener("touchend", (e) => {
-    if (!isCinematicMode) return;
-    const touchEndX = e.changedTouches[0].screenX;
-    const touchEndY = e.changedTouches[0].screenY;
-    const diffX = touchEndX - touchStartX;
-    const diffY = touchEndY - touchStartY;
+  window.addEventListener(
+    "touchend",
+    (e) => {
+      if (!isCinematicMode) return;
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
 
-    if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY)) {
-      if (diffX < 0) {
-        nextChapter();
-      } else {
-        prevChapter();
+      if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < 0) {
+          nextChapter();
+        } else {
+          prevChapter();
+        }
       }
-    }
-  }, { passive: true });
+    },
+    { passive: true },
+  );
 
   // Initial State Setup in Cinematic Mode
   document.body.classList.add("cinematic-mode");
@@ -237,7 +272,9 @@ document.addEventListener("DOMContentLoaded", () => {
   goToChapter(0, false);
 
   // 4. Floating Audio Single Button Control (Spinning when playing / Static when paused)
-  const audioBtn = document.getElementById("floating-audio-btn") || document.getElementById("floating-audio-widget");
+  const audioBtn =
+    document.getElementById("floating-audio-btn") ||
+    document.getElementById("floating-audio-widget");
   const localAudioInput = document.getElementById("local-audio-input");
 
   if (audioBtn) {
