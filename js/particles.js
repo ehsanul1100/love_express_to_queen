@@ -12,7 +12,8 @@ class RoyalParticleEngine {
     this.burstParticles = [];
     this.width = 0;
     this.height = 0;
-    this.maxAmbientParticles = 55;
+    this.isMobile = window.innerWidth < 768;
+    this.maxAmbientParticles = this.isMobile ? 22 : 45;
 
     this.resize();
     this.initAmbientParticles();
@@ -24,6 +25,8 @@ class RoyalParticleEngine {
   resize() {
     this.width = this.canvas.width = window.innerWidth;
     this.height = this.canvas.height = window.innerHeight;
+    this.isMobile = window.innerWidth < 768;
+    this.maxAmbientParticles = this.isMobile ? 22 : 45;
   }
 
   bindEvents() {
@@ -42,7 +45,7 @@ class RoyalParticleEngine {
     return {
       x: Math.random() * this.width,
       y: Math.random() * this.height,
-      radius: Math.random() * 2.2 + 0.6,
+      radius: Math.random() * 2.0 + 0.6,
       color: isGold
         ? `rgba(255, 215, 0, ${Math.random() * 0.6 + 0.2})`
         : `rgba(254, 240, 205, ${Math.random() * 0.5 + 0.2})`,
@@ -58,6 +61,9 @@ class RoyalParticleEngine {
    * Shower of Rose Petals & Golden Hearts
    */
   showerLove(count = 60) {
+    if (this.isMobile) {
+      count = Math.min(count, 25);
+    }
     const colors = [
       "#e11d48",
       "#be123c",
@@ -98,34 +104,29 @@ class RoyalParticleEngine {
     ctx.save();
     ctx.translate(x, y);
     ctx.beginPath();
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = color;
     const topCurveHeight = size * 0.3;
     ctx.moveTo(0, topCurveHeight);
-    // top left curve
     ctx.bezierCurveTo(0, 0, -size / 2, 0, -size / 2, topCurveHeight);
-    // bottom left curve
     ctx.bezierCurveTo(
       -size / 2,
       (size + topCurveHeight) / 2,
       0,
-      (size + topCurveHeight) / 2,
-      0,
       size,
+      0,
+      size * 1.15,
     );
-    // bottom right curve
     ctx.bezierCurveTo(
       0,
-      (size + topCurveHeight) / 2,
+      size,
       size / 2,
       (size + topCurveHeight) / 2,
       size / 2,
       topCurveHeight,
     );
-    // top right curve
     ctx.bezierCurveTo(size / 2, 0, 0, 0, 0, topCurveHeight);
-    ctx.fillStyle = color;
-    ctx.globalAlpha = opacity;
-    ctx.shadowColor = "rgba(255, 215, 0, 0.4)";
-    ctx.shadowBlur = 8;
+    ctx.closePath();
     ctx.fill();
     ctx.restore();
   }
@@ -135,11 +136,9 @@ class RoyalParticleEngine {
     ctx.translate(x, y);
     ctx.rotate((rotation * Math.PI) / 180);
     ctx.beginPath();
-    ctx.ellipse(0, 0, size * 0.8, size * 0.4, 0, 0, Math.PI * 2);
-    ctx.fillStyle = color;
     ctx.globalAlpha = opacity;
-    ctx.shadowColor = "rgba(159, 18, 57, 0.3)";
-    ctx.shadowBlur = 6;
+    ctx.fillStyle = color;
+    ctx.ellipse(0, 0, size * 0.45, size * 0.8, Math.PI / 4, 0, 2 * Math.PI);
     ctx.fill();
     ctx.restore();
   }
@@ -147,24 +146,24 @@ class RoyalParticleEngine {
   animate() {
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    // 1. Draw Ambient Gold Particles
+    // 1. Draw Ambient Floating Embers (Zero shadowBlur overhead)
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
       p.pulseVal += p.pulseSpeed;
       const currentAlpha = p.alpha * (0.6 + 0.4 * Math.sin(p.pulseVal));
 
-      if (p.y < -10 || p.x < -10 || p.x > this.width + 10) {
-        this.particles[i] = this.createAmbientParticle();
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < -10) p.x = this.width + 10;
+      if (p.x > this.width + 10) p.x = -10;
+      if (p.y < -10) {
         this.particles[i].y = this.height + 10;
       }
 
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       this.ctx.fillStyle = p.color.replace(/[\d\.]+\)$/, `${currentAlpha})`);
-      this.ctx.shadowColor = "rgba(255, 215, 0, 0.6)";
-      this.ctx.shadowBlur = 6;
       this.ctx.fill();
     }
 
@@ -203,8 +202,6 @@ class RoyalParticleEngine {
         this.ctx.arc(bp.x, bp.y, bp.size * 0.3, 0, Math.PI * 2);
         this.ctx.fillStyle = bp.color;
         this.ctx.globalAlpha = bp.opacity;
-        this.ctx.shadowColor = "rgba(255, 215, 0, 0.8)";
-        this.ctx.shadowBlur = 10;
         this.ctx.fill();
       }
     }
