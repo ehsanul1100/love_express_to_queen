@@ -42,9 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
     currentChapterIndex = index;
 
     // Update Architectural Scenery Layer
-    sceneryLayers.forEach((layer, idx) => {
-      layer.classList.toggle("scenery-active", idx === currentChapterIndex);
-    });
+    if (window.RoyalSceneries) {
+      window.RoyalSceneries.setChapter(currentChapterIndex);
+    } else {
+      const layers = document.querySelectorAll(".scenery-layer");
+      layers.forEach((layer, idx) => {
+        layer.classList.toggle("scenery-active", idx === currentChapterIndex);
+      });
+    }
 
     // Update HUD Dots
     stepDots.forEach((dot, i) => {
@@ -195,12 +200,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const index = chapters.findIndex((ch) => ch.id === id);
         if (index !== -1 && index !== currentChapterIndex) {
           currentChapterIndex = index;
-          sceneryLayers.forEach((layer, idx) => {
-            layer.classList.toggle(
-              "scenery-active",
-              idx === currentChapterIndex,
-            );
-          });
+          if (window.RoyalSceneries) {
+            window.RoyalSceneries.setChapter(currentChapterIndex);
+          } else {
+            const layers = document.querySelectorAll(".scenery-layer");
+            layers.forEach((layer, idx) => {
+              layer.classList.toggle(
+                "scenery-active",
+                idx === currentChapterIndex,
+              );
+            });
+          }
           stepDots.forEach((dot, i) => {
             dot.classList.toggle("active", i === currentChapterIndex);
           });
