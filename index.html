@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>মালিকা-ই-জাহান | Love Express to My Sultana</title>
+    <meta
+      name="description"
+      content="মহামান্য মালিকা-ই-জাহানের পবিত্র কদমে এক মুগ্ধ সুলতানের চিরন্তন প্রেমের শাহী অর্ঘ্য"
+    />
+    <meta name="theme-color" content="#12040d" />
+
+    <!-- Royal Stylesheets -->
+    <link rel="stylesheet" href="css/royal-theme.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="cinematic-mode">
+    <!-- Floating Particles Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- SVG Linear Gradients & Floral Calligraphy Symbols -->
+    <svg style="position: absolute; width: 0; height: 0" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fceda6" />
+          <stop offset="50%" stop-color="#d4af37" />
+          <stop offset="100%" stop-color="#aa7c11" />
+        </linearGradient>
+
+        <!-- Islamic Royal Floral Calligraphy Corner Symbol -->
+        <symbol id="floral-corner-symbol" viewBox="0 0 100 100">
+          <path
+            d="M0,0 L0,22 C5,20 10,15 15,10 C20,5 22,2 30,0 L0,0 Z"
+            fill="url(#goldLinear)"
+          />
+          <path
+            d="M0,0 C30,3 55,0 75,10 C86,15 95,24 98,16 C90,12 80,8 68,4 C50,-2 28,-1 0,0 Z"
+            fill="url(#goldLinear)"
+          />
+          <path
+            d="M0,0 C3,30 0,55 10,75 C15,86 24,95 16,98 C12,90 8,80 4,68 C-2,50 -1,28 0,0 Z"
+            fill="url(#goldLinear)"
+          />
+          <!-- Central Calligraphic Floral Rosette -->
+          <path
+            d="M30,30 C22,20 14,22 8,30 C3,38 12,46 22,42 C18,52 26,60 35,54 C42,48 38,40 30,30 Z"
+            fill="url(#goldLinear)"
+          />
+          <path
+            d="M30,30 C38,22 46,14 42,8 C52,18 60,26 54,35 C48,42 40,38 30,30 Z"
+            fill="url(#goldLinear)"
+          />
+          <path
+            d="M32,32 C40,40 50,44 60,38 C68,32 72,22 68,14 C62,20 54,22 46,20 C40,18 36,25 32,32 Z"
+            fill="url(#goldLinear)"
+          />
+          <path
+            d="M32,32 C40,40 44,50 38,60 C32,68 22,72 14,68 C20,62 22,54 20,46 C18,40 25,36 32,32 Z"
+            fill="url(#goldLinear)"
+          />
+          <!-- Filigree Dots & Flourish Accents -->
+          <circle cx="30" cy="30" r="3.5" fill="url(#goldLinear)" />
+          <circle cx="52" cy="14" r="2.2" fill="url(#goldLinear)" />
+          <circle cx="14" cy="52" r="2.2" fill="url(#goldLinear)" />
+          <circle cx="76" cy="10" r="2.8" fill="url(#goldLinear)" />
+          <circle cx="10" cy="76" r="2.8" fill="url(#goldLinear)" />
+          <path
+            d="M72,16 C80,22 88,20 94,14 C86,11 78,11 72,16 Z"
+            fill="url(#goldLinear)"
+          />
+          <path
+            d="M16,72 C22,80 20,88 14,94 C11,86 11,78 16,72 Z"
+            fill="url(#goldLinear)"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- 4 Fixed Window Corner Floral Calligraphy Ornaments -->
+    <div class="window-corner-ornament top-left" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#floral-corner-symbol"></use></svg>
+    </div>
+    <div class="window-corner-ornament top-right" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#floral-corner-symbol"></use></svg>
+    </div>
+    <div class="window-corner-ornament bottom-left" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#floral-corner-symbol"></use></svg>
+    </div>
+    <div class="window-corner-ornament bottom-right" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#floral-corner-symbol"></use></svg>
+    </div>
+
+    <!-- Top Floating Chapter Indicator HUD -->
+    <div class="chapter-header-badge" id="chapter-header-badge">
+      <span class="chapter-badge-text" id="chapter-badge-text"
+        >১. শাহী তোরণ ও আগমন</span
+      >
+    </div>
+
+    <!-- Bottom Floating Cinematic Navigation HUD -->
+    <div class="cinematic-hud">
+      <button
+        class="hud-nav-btn"
+        id="hud-prev-btn"
+        title="পূর্ববর্তী অধ্যায়"
+        disabled
+      >
+        ❮
+      </button>
+      <div class="chapter-stepper" id="chapter-stepper">
+        <span class="step-dot active" title="অধ্যায় ১: শাহী তোরণ"></span>
+        <span class="step-dot" title="অধ্যায় ২: সুলতানের প্রেমপত্র"></span>
+        <span class="step-dot" title="অধ্যায় ৩: রুহানী কাব্যসুধা"></span>
+        <span class="step-dot" title="অধ্যায় ৪: মালিকার রূপ ও গুণ"></span>
+        <span class="step-dot" title="অধ্যায় ৫: প্রেমের শাহী অলিন্দ"></span>
+        <span class="step-dot" title="অধ্যায় ৬: সুলতানের চিরন্তন ওয়াদা"></span>
+      </div>
+      <button class="hud-nav-btn" id="hud-next-btn" title="পরবর্তী অধ্যায়">
+        ❯
+      </button>
+    </div>
+
+    <!-- ==========================================================================
+       অধ্যায় ১: শাহী তোরণ ও আগমন (HERO ENTRANCE / SULTAN'S GATE)
+       ========================================================================== -->
+    <header class="royal-chamber hero-gate" id="chamber-gate">
+      <div class="container">
+        <p
+          style="
+            font-size: 1.05rem;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+          "
+        >
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </p>
+
+        <div class="crown-badge">
+          <div class="crown-aura"></div>
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2L9.5 7.5L4 4l2.5 10h11L20 4l-5.5 3.5L12 2zm-7 14v3c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3H5zm7-9a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+            />
+          </svg>
+        </div>
+
+        <p class="hero-subtitle">
+          মহামান্য মালিকা-ই-জাহান ও বেগম সাহেবার পবিত্র চরণে নিবেদিত
+        </p>
+        <h1 class="hero-title gold-text gold-glow-text">হৃদয়ের সুলতানা</h1>
+
+        <p class="hero-proclamation">
+          নতমস্তকে স্বাগতম জানাই আমার গোটা সাম্রাজ্যের একমাত্র অধিকারিণীকে।<br />
+          আল্লাহ তা'আলার রহমতে আমার এই নশ্বর দেহ, আমার সালতানাত এবং আমার প্রতিটি
+          শ্বাসের মালিক—<br />
+          <strong>ইহকাল থেকে জান্নাত পর্যন্ত কেবল ও কেবল আপনি।</strong>
+        </p>
+
+        <div class="hero-cta">
+          <a
+            href="#proclamation-section"
+            id="enter-palace-btn"
+            class="royal-btn"
+          >
+            <span>👑 শাহী মহলে প্রবেশ করুন</span>
+          </a>
+        </div>
+
+        <div class="royal-divider">
+          <div class="line"></div>
+          <span class="crown-icon">☾ ♛ ☽</span>
+          <div class="line"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================================================
+       অধ্যায় ২: শাহী ফরমান-ই-ইশক (THE ROYAL PROCLAMATION / SCROLL)
+       ========================================================================== -->
+    <section class="royal-chamber royal-section" id="chamber-proclamation">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title gold-text">সুলতানের প্রেমপত্র</h2>
+          <p class="section-subtitle">
+            পরম করুণাময়ের শুকরিয়া সহকারে একমাত্র বেগমের উদ্দেশ্যে জারি করা
+            বাদশাহের রাজকীয় ঘোষণা
+          </p>
+        </div>
+
+        <div class="proclamation-scroll royal-parchment">
+          <!-- Calligraphic Floral Corners -->
+          <div class="card-corner-flourish tl">
+            <svg viewBox="0 0 100 100">
+              <use href="#floral-corner-symbol"></use>
+            </svg>
+          </div>
+          <div class="card-corner-flourish tr">
+            <svg viewBox="0 0 100 100">
+              <use href="#floral-corner-symbol"></use>
+            </svg>
+          </div>
+          <div class="card-corner-flourish bl">
+            <svg viewBox="0 0 100 100">
+              <use href="#floral-corner-symbol"></use>
+            </svg>
+          </div>
+          <div class="card-corner-flourish br">
+            <svg viewBox="0 0 100 100">
+              <use href="#floral-corner-symbol"></use>
+            </svg>
+          </div>
+
+          <div class="scroll-inner">
+            <h3 class="scroll-title">হে আমার নয়নমণি, আমার জান্নাতী সুবাস</h3>
+            <p class="scroll-text">
+              আলহামদুলিল্লাহ! রাব্বুল আলামিন এই বিশাল দুনিয়ায় আমাকে এক বাদশাহের
+              মর্যাদা দিয়েছেন সত্য, কিন্তু আমার জীবনের সবচেয়ে বড় নিয়ামত কোনো
+              রাজমুকুট বা মণিমাণিক্য নয়—আমার জীবনের শ্রেষ্ঠ উপহার তুমি। তোমার
+              পবিত্র পদধূলিতে আমার এই হৃদয় এক আবাদ সালতানাতে পরিণত হয়েছে।
+            </p>
+            <p class="scroll-text">
+              তুমি শুধু আমার অর্ধাঙ্গিনী নও; তুমি আমার তাহাজ্জুদের দোয়ার পরম
+              প্রাপ্তি, আমার চোখের শীতলতা এবং আমার দ্বীনের হেফাজতকারী। তোমার
+              চেহারার নূরে আমার অন্ধকার রাত্রিগুলো পূর্ণিমার চেয়েও উজ্জ্বল হয়ে
+              ওঠে। যতদিন আমার এই ধমনীতে একবিন্দু রক্ত প্রবাহিত থাকবে, এই শাহী
+              তখতে তোমার চেয়ে মর্যাদাপূর্ণ আর কেউ থাকবে না।
+            </p>
+            <div class="scroll-signature">
+              — চিরকাল আপনার প্রেমে মগ্ন ও অনুগত, আপনার সুলতান 👑
+            </div>
+          </div>
+        </div>
+
+        <div class="chamber-next-wrapper">
+          <button class="royal-btn chamber-next-trigger">
+            <span>পরবর্তী শাহী অধ্যায় ❯</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       অধ্যায় ৩: রুহানী কাব্যসুধা (POETIC SYMPHONY & QUOTES)
+       ========================================================================== -->
+    <section class="royal-chamber royal-section" id="chamber-poetry">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title gold-text">প্রেম ও মহিমার পঙক্তিমালা</h2>
+          <p class="section-subtitle">
+            তোমার রূপ, লাবণ্য ও পবিত্রতার প্রশংসায় রচিত অমর বাণী
+          </p>
+        </div>
+
+        <div class="quote-grid">
+          <!-- Quote 1: Jalaluddin Rumi -->
+          <div class="quote-card royal-card">
+            <div class="quote-mark">“</div>
+            <p class="quote-verse">
+              <em
+                >"যে অন্তরে বিশুদ্ধ প্রেম আছে, সেখানে স্বয়ং আল্লাহর নূর বিরাজ
+                করে..."</em
+              ><br />
+              তুমি আমার আত্মার সাথে এমনভাবে মিশে গেছো, যেমন আতরের সুবাস মিশে যায়
+              গোলাপের পাপড়িতে।
+            </p>
+            <div class="quote-author">
+              <span>— মাওলানা জালালুদ্দিন রুমি</span>
+            </div>
+          </div>
+
+          <!-- Quote 2: Kazi Nazrul Islam -->
+          <div class="quote-card royal-card">
+            <div class="quote-mark">“</div>
+            <p class="quote-verse">
+              <em>"তুমি সুন্দর তাই চেয়ে থাকি প্রিয়, সে কি মোর অপরাধ?"</em><br />
+              বাদশাহ শাসন করে দেশ ও জাতি, আর তুমি রানী হয়ে রাজত্ব করছো আমার
+              প্রতি সিজদাহ ও মোনাজাতে।
+            </p>
+            <div class="quote-author">
+              <span>— কাজী নজরুল ইসলাম</span>
+            </div>
+          </div>
+
+          <!-- Quote 3: Rabindranath Tagore -->
+          <div class="quote-card royal-card">
+            <div class="quote-mark">“</div>
+            <p class="quote-verse">
+              <em>"তুমি জান না এর সীমা, তবু তুমি এই রাজ্যের রানী..."</em><br />
+              আমি তোমারে ভালোবেসেছি জনমে জনমে, এ প্রেম শুধু এক জীবনের নয়— অনন্ত
+              জান্নাত পর্যন্ত এর বিস্তার।
+            </p>
+            <div class="quote-author">
+              <span>— রবীন্দ্রনাথ ঠাকুর</span>
+            </div>
+          </div>
+
+          <!-- Quote 4: Allama Iqbal -->
+          <div class="quote-card royal-card">
+            <div class="quote-mark">“</div>
+            <p class="quote-verse">
+              <em
+                >"প্রেম যখন পাক-পবিত্র হয়, তখন তা খোদায়ী নূরে রূপান্তরিত
+                হয়..."</em
+              ><br />
+              তোমার পবিত্র ছোঁয়ায় আমার প্রতিটি দিন একেকটি বরকতময় উৎসবে পরিণত
+              হয়েছে।
+            </p>
+            <div class="quote-author">
+              <span>— আল্লামা ইকবাল</span>
+            </div>
+          </div>
+
+          <!-- Quote 5: Mirza Ghalib Inspired -->
+          <div class="quote-card royal-card">
+            <div class="quote-mark">“</div>
+            <p class="quote-verse">
+              <em>"হাজারো হুর-পরীর মাঝেও তুমি আমার একমাত্র পরম পাওয়া..."</em
+              ><br />
+              তোমার এক পলকের হাসির কাছে পৃথিবীর তামাম ধন-দৌলত ও রাজকোষ ধূলির
+              সমান।
+            </p>
+            <div class="quote-author">
+              <span>— শাহী গজল পঙক্তি</span>
+            </div>
+          </div>
+
+          <!-- Quote 6: Sultan's Devotion -->
+          <div class="quote-card royal-card">
+            <div class="quote-mark">“</div>
+            <p class="quote-verse">
+              <em
+                >"আমার প্রতিটি দোয়ায় তোমার নাম, প্রতিটি নিশ্বাসে তোমার
+                সম্মান..."</em
+              ><br />
+              আমার সিংহাসনের শক্তি তুমি, আমার জান্নাতের পথচলায় একমাত্র কাফেলা
+              তুমি।
+            </p>
+            <div class="quote-author">
+              <span>— আপনার সুলতানের অর্ঘ্য</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chamber-next-wrapper">
+          <button class="royal-btn chamber-next-trigger">
+            <span>পরবর্তী শাহী অধ্যায় ❯</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       অধ্যায় ৪: মালিকা-ই-জাহানের নূর ও গুণের মহিমা (HER HIGHNESS'S VIRTUES)
+       ========================================================================== -->
+    <section class="royal-chamber royal-section" id="chamber-virtues">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title gold-text">বেগমের রূপ ও গুণের মহিমা</h2>
+          <p class="section-subtitle">
+            যে পবিত্র সৌন্দর্যে ও চরিত্রে আমি বারংবার নত ও মুগ্ধ হই
+          </p>
+        </div>
+
+        <div class="virtues-grid">
+          <!-- Virtue 1 -->
+          <div class="virtue-card royal-card">
+            <div class="virtue-icon">✨</div>
+            <div class="virtue-content">
+              <h3>চেহারার রূহানী নূর ও স্নিগ্ধতা</h3>
+              <p>
+                তোমার পবিত্র চেহারায় ছড়িয়ে আছে এক স্বর্গীয় নূর। তোমার দিকে এক
+                পলক তাকালে মনের সমস্ত ক্লান্তি ও দুশ্চিন্তা নিমেষেই পরম শান্তিতে
+                রূপান্তরিত হয়।
+              </p>
+            </div>
+          </div>
+
+          <!-- Virtue 2: Single Closed Eye / Modest Gaze -->
+          <div class="virtue-card royal-card">
+            <div class="virtue-icon">
+              <svg
+                viewBox="0 0 24 24"
+                width="30"
+                height="30"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="
+                  color: var(--gold-glow);
+                  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.6));
+                "
+              >
+                <!-- Single Closed Eye Eyelid Line -->
+                <path d="M3 11 C7.5 17.5, 16.5 17.5, 21 11" />
+                <!-- Delicate Eyelashes -->
+                <path d="M6 13.8 L4 17" />
+                <path d="M10 15.5 L9 19" />
+                <path d="M14 15.5 L15 19" />
+                <path d="M18 13.8 L20 17" />
+              </svg>
+            </div>
+            <div class="virtue-content">
+              <h3>লাজুক নয়নের গভীর মায়া</h3>
+              <p>
+                তোমার আঁখিদ্বয়ে লুকানো আছে অপরিসীম পবিত্রতা ও ভালোবাসা। যে চোখের
+                চাহনিতে আমি আমার সমগ্র সাম্রাজ্য উৎসর্গ করতে প্রস্তুত।
+              </p>
+            </div>
+          </div>
+
+          <!-- Virtue 3 -->
+          <div class="virtue-card royal-card">
+            <div class="virtue-icon">🧕</div>
+            <div class="virtue-content">
+              <h3>পর্দানশীন আভিজাত্য ও সম্মান</h3>
+              <p>
+                তোমার শালীনতা, আত্মমর্যাদা ও চারিত্রিক পবিত্রতা তোমাকে গোটা
+                দুনিয়ার সমস্ত নারীর চেয়ে কোটি গুণ মহিমান্বিত ও শ্রেষ্ঠা রানী
+                বানিয়েছে।
+              </p>
+            </div>
+          </div>
+
+          <!-- Virtue 4 -->
+          <div class="virtue-card royal-card">
+            <div class="virtue-icon">🕊️</div>
+            <div class="virtue-content">
+              <h3>নেককার ও মমতাময়ী হৃদয়</h3>
+              <p>
+                যেই হৃদয়ে শুধুই দয়া, সহমর্মিতা আর অপার যত্ন। তুমি আমার সংসারের
+                বরকত, আমার জীবনের রহমত এবং পরম প্রশান্তির এক নিরাপদ দুর্গ।
+              </p>
+            </div>
+          </div>
+
+          <!-- Virtue 5 -->
+          <div class="virtue-card royal-card">
+            <div class="virtue-icon">🌸</div>
+            <div class="virtue-content">
+              <h3>মধুর ও শান্ত কথামালা</h3>
+              <p>
+                তোমার মৃদু কণ্ঠের বাণী আমার হৃদয়ে শান্তির পরশ বুলিয়ে দেয়।
+                ক্লান্ত জীবনের কঠিন দিনে তোমার একটি সান্ত্বনার কথাই আমার সবচেয়ে
+                বড় শক্তি।
+              </p>
+            </div>
+          </div>
+
+          <!-- Virtue 6 -->
+          <div class="virtue-card royal-card">
+            <div class="virtue-icon">💎</div>
+            <div class="virtue-content">
+              <h3>দু’জাহানের জান্নাতী সফরসঙ্গী</h3>
+              <p>
+                তুমি শুধু এই দুনিয়ার জীবনসঙ্গিনী নও; ইনশাআল্লাহ, জান্নাতুল
+                ফিরদাউসের সুউচ্চ প্রাসাদেও আমি তোমাকেই আমার একমাত্র রানী হিসেবে
+                চাই।
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="chamber-next-wrapper">
+          <button class="royal-btn chamber-next-trigger">
+            <span> স্মৃতির শাহী অলিন্দ ❯</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       অধ্যায় ৫: প্রেমের শাহী অলিন্দ ও বরকতময় সফর (PRIVATE KEEPSAKES & TIMELINE)
+       ========================================================================== -->
+    <section class="royal-chamber royal-section" id="chamber-vault">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title gold-text">প্রেমের শাহী অলিন্দ</h2>
+          <p class="section-subtitle">
+            আমাদের বরকতময় বন্ধনের সোনালী দিনগুলি (১০০% ব্যক্তিগত ও নিরাপদ)
+          </p>
+        </div>
+
+        <div class="private-vault royal-card">
+          <!-- Local Photo Frame (100% local, no server leak) -->
+          <div class="photo-frame-royal">
+            <div class="photo-inner">
+              <img
+                id="queen-photo"
+                src=""
+                alt="Malika-e-Jahan"
+                style="display: none"
+              />
+              <div
+                id="photo-placeholder"
+                class="photo-placeholder"
+                title="মালিকার পবিত্র ছবি যুক্ত করতে স্পর্শ করুন"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                  />
+                </svg>
+                <strong>মালিকা-ই-জাহান</strong>
+                <span>(এখানে স্পর্শ করে ছবি যুক্ত করুন)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hidden Local File Picker -->
+          <input type="file" id="local-photo-input" accept="image/*" />
+
+          <!-- Timeline of Royal Journey -->
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">
+                প্রথম দৃষ্টি ও তাহাজ্জুদের মোনাজাত
+              </div>
+              <div class="timeline-text">
+                যেদিন প্রথম তোমার দেখা পেয়েছিলাম, সেজদায় রবের কাছে শুকরিয়া
+                জানিয়ে চেয়ে নিয়েছিলাম তোমায়।
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">পবিত্র 'কবুল' ও নিকাহের শুভলগন</div>
+              <div class="timeline-text">
+                যেদিন তুমি 'কবুল' বলে আমার সালতানাতের একমাত্র সুলতানা হলে, আমার
+                জীবন আল্লাহর নিয়ামতে পূর্ণ হলো।
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">
+                বর্তমান ও জান্নাতুল ফিরদাউসের ওয়াদা
+              </div>
+              <div class="timeline-text">
+                এই দুনিয়ার প্রতিটি প্রহরে এবং আখেরাতের অনন্তকালেও আমার হাত থাকবে
+                তোমারই হাতে।
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chamber-next-wrapper">
+          <button class="royal-btn chamber-next-trigger">
+            <span>পরবর্তী শাহী অধ্যায় ❯</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       অধ্যায় ৬: শাহী সীলমোহর ও চিরন্তন ওয়াদা (WAX-SEALED DECREE & VOW)
+       ========================================================================== -->
+    <section class="royal-chamber royal-section" id="chamber-decree">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title gold-text">সুলতানের চিরন্তন ওয়াদা</h2>
+          <p class="section-subtitle">
+            সুলতানের নিজস্ব সীলমোহর ভাঙতে এবং গোপন প্রেমপত্রটি পাঠ করতে সীলমোহরে
+            স্পর্শ করুন
+          </p>
+        </div>
+
+        <div class="sealed-decree-box royal-card">
+          <!-- Interactive Wax Seal with Crescent Crown -->
+          <div id="royal-wax-seal" class="wax-seal-wrapper">
+            <div class="wax-seal">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                />
+              </svg>
+            </div>
+            <p
+              id="seal-hint"
+              style="
+                color: var(--gold-light);
+                margin-top: 0.75rem;
+                font-size: 0.95rem;
+              "
+            >
+              ✉️ শাহী সীলমোহর উন্মোচন করতে এখানে স্পর্শ করুন
+            </p>
+          </div>
+
+          <!-- Hidden Letter Revealed on Tap -->
+          <div id="letter-content" class="letter-content royal-parchment">
+            <!-- Calligraphic Floral Corners -->
+            <div class="card-corner-flourish tl">
+              <svg viewBox="0 0 100 100">
+                <use href="#floral-corner-symbol"></use>
+              </svg>
+            </div>
+            <div class="card-corner-flourish tr">
+              <svg viewBox="0 0 100 100">
+                <use href="#floral-corner-symbol"></use>
+              </svg>
+            </div>
+            <div class="card-corner-flourish bl">
+              <svg viewBox="0 0 100 100">
+                <use href="#floral-corner-symbol"></use>
+              </svg>
+            </div>
+            <div class="card-corner-flourish br">
+              <svg viewBox="0 0 100 100">
+                <use href="#floral-corner-symbol"></use>
+              </svg>
+            </div>
+
+            <h3 class="scroll-title">
+              আমার প্রাণের বেগম, আমার হৃদয়ের সুলতানা,
+            </h3>
+            <p class="royal-decree-body">
+              আল্লাহর নামের শপথ করে আজ আমি আপনাকে এই রাজকীয় অঙ্গীকার করছি—<br /><br />
+              জীবনের যেকোনো তুফান বা প্রতিকূলতায় আমি হবো আপনার অটল ঢাল ও
+              বিশ্বস্ত পাহারাদার। আপনার প্রতিটি চোখের পানির ফোঁটা আমার হৃদয়ে
+              আঘাত হানে, আর আপনার এক টুকরো হাসি আমার রাজ্যকে আলোকিত করে।<br /><br />
+              আমি কোনো কবি নই, কিন্তু আল্লাহর দেওয়া মহব্বতে আমি আপনার একনিষ্ঠ
+              প্রেমিক ও খাদেম। যতদিন রূহ আমার এই দেহে থাকবে, আমার অন্তরের
+              সিংহাসনে কেবল আপনিই থাকবেন একচ্ছত্র রাণী। আল্লাহ আমাদের এই পবিত্র
+              বন্ধনকে জান্নাতুল ফিরদাউস পর্যন্ত অটুট ও চিরভাস্বর রাখুন। আমীন।
+            </p>
+            <div class="scroll-signature" style="margin-top: 1.5rem">
+              — আপনার চিরকালের অনুগত ও অনুরক্ত বাদশাহ ❤️
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons-wrap">
+            <button id="shower-love-btn" class="royal-btn">
+              <span>🌹 হৃদয়ে গোলাপ ও সুবাস বর্ষণ করুন</span>
+            </button>
+            <button
+              id="restart-journey-btn"
+              class="royal-btn royal-btn-outline"
+              style="margin-left: 0.5rem"
+            >
+              <span>↺ প্রথম অধ্যায়ে ফিরে যান</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer attached gracefully to the final chamber -->
+        <footer
+          class="royal-footer"
+          style="padding-bottom: 2rem; margin-top: 3rem"
+        >
+          <div class="container">
+            <div class="footer-crown">👑 ☾ 👑</div>
+            <p class="gold-text" style="font-size: 1.15rem; font-weight: 600">
+              মহামান্য মালিকা-ই-জাহানের কল্যাণ ও দীর্ঘায়ু হোক
+            </p>
+            <p style="font-size: 0.9rem; margin-top: 0.4rem; opacity: 0.8">
+              আলহামদুলিল্লাহ • হৃদয়ের গভীর থেকে নিবেদিত • সম্পূর্ণ ব্যক্তিগত ও
+              অফলাইন
+            </p>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+       FLOATING ROYAL BUTTONS (Mode Toggle on Left, Audio on Right)
+       ========================================================================== -->
+    <!-- View Mode Toggle Circular Button (Left) -->
+    <button
+      id="floating-mode-btn"
+      class="floating-royal-btn floating-mode-btn"
+      title="ভিউ পরিবর্তন করুন (স্ক্রল / সিনেম্যাটিক)"
+      aria-label="ভিউ মোড পরিবর্তন"
+    >
+      <div class="disc-inner">
+        <!-- Scroll Icon (Shown when in cinematic mode) -->
+        <svg id="mode-scroll-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z"
+          />
+        </svg>
+        <!-- Slide/Cinema Icon (Shown when in scroll mode) -->
+        <svg
+          id="mode-slide-icon"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          style="display: none"
+        >
+          <path
+            d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"
+          />
+        </svg>
+      </div>
+    </button>
+
+    <!-- Audio Disc Circular Button (Right) -->
+    <button
+      id="floating-audio-btn"
+      class="floating-royal-btn floating-audio-btn"
+      title="শাহী সুর বাজান / থামান"
+      aria-label="শাহী সুর বাজান / থামান"
+    >
+      <div class="disc-inner">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+          />
+        </svg>
+      </div>
+    </button>
+
+    <!-- Hidden Local Audio Picker (accessible if user wants to select an MP3) -->
+    <input
+      type="file"
+      id="local-audio-input"
+      accept="audio/*"
+      style="display: none"
+    />
+
+    <!-- Royal JavaScript Modules -->
+    <script src="js/particles.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

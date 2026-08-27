@@ -1,0 +1,588 @@
+/* ==========================================================================
+   ROYAL THEME & AESTHETICS - "মহারাণীর রাজদরবার"
+   Luxury Royal Wine Velvet, Imperial Gold, Shimmer & Glassmorphism
+   ========================================================================== */
+
+:root {
+  /* Core Royal Color Palette */
+  --royal-dark-900: #0d0208;
+  --royal-dark-800: #1a0412;
+  --royal-dark-700: #2a071d;
+  --royal-wine-600: #3f0b2a;
+  --royal-wine-500: #5c103e;
+  --royal-emerald-deep: #071912;
+
+  /* Imperial Gold Accents */
+  --gold-primary: #d4af37;
+  --gold-light: #fef0cd;
+  --gold-glow: #ffd700;
+  --gold-dark: #997920;
+  --gold-gradient: linear-gradient(
+    135deg,
+    #fceda6 0%,
+    #d4af37 40%,
+    #aa7c11 75%,
+    #f9e295 100%
+  );
+  --gold-border-gradient: linear-gradient(
+    135deg,
+    rgba(254, 240, 205, 0.8),
+    rgba(212, 175, 55, 0.4),
+    rgba(153, 121, 32, 0.8)
+  );
+  --royal-card-bg: rgba(26, 4, 18, 0.7);
+  --royal-parchment-bg: #f7eed7;
+  --royal-parchment-dark: #e8d7b3;
+  --royal-text-light: #fcf8f0;
+  --royal-text-muted: #d9c5b2;
+  --royal-text-dark: #2c1a0e;
+
+  /* Shadows & Glows */
+  --glow-gold: 0 0 25px rgba(212, 175, 55, 0.35);
+  --glow-gold-intense: 0 0 40px rgba(255, 215, 0, 0.6);
+  --glow-wine: 0 10px 30px rgba(63, 11, 42, 0.5);
+  --card-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(212, 175, 55, 0.25);
+
+  /* Typography */
+  --font-bangla-heading: "Galada", "Tiro Bangla", "Noto Serif Bengali", serif;
+  --font-bangla-body: "Hind Siliguri", "Noto Serif Bengali", sans-serif;
+  --font-royal-serif: "Cinzel Decorative", "Playfair Display", Georgia, serif;
+}
+
+/* Background Royal Canvas */
+body {
+  background-color: var(--royal-dark-900);
+  background-image:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(92, 16, 62, 0.35) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 10% 40%,
+      rgba(63, 11, 42, 0.25) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 70%,
+      rgba(212, 175, 55, 0.08) 0%,
+      transparent 50%
+    ),
+    linear-gradient(180deg, #10020b 0%, #1c0514 50%, #0d0208 100%);
+  background-attachment: fixed;
+  color: var(--royal-text-light);
+  font-family: var(--font-bangla-body);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Luxury Gold Text Gradient */
+.gold-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: var(--gold-primary);
+  display: inline-block;
+}
+
+.gold-glow-text {
+  text-shadow:
+    0 0 12px rgba(255, 215, 0, 0.6),
+    0 0 25px rgba(212, 175, 55, 0.3);
+}
+
+/* Royal Glassmorphism Cards */
+.royal-card {
+  background: var(--royal-card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.royal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold-gradient);
+  opacity: 0.8;
+}
+
+.royal-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.7),
+    0 0 20px rgba(212, 175, 55, 0.25);
+  border-color: rgba(212, 175, 55, 0.6);
+}
+
+/* Royal Ornaments & Dividers */
+.royal-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  gap: 1rem;
+  width: 80%;
+  max-width: 400px;
+}
+
+.royal-divider .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.6),
+    transparent
+  );
+}
+
+.royal-divider .crown-icon {
+  color: var(--gold-primary);
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.5));
+}
+
+/* Royal Buttons */
+.royal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.8rem;
+  background: var(--gold-gradient);
+  color: var(--royal-dark-900);
+  font-family: var(--font-bangla-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow:
+    0 6px 20px rgba(212, 175, 55, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.royal-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: rotate(25deg);
+  transition: all 0.6s ease;
+}
+
+.royal-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 10px 28px rgba(212, 175, 55, 0.6),
+    0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.royal-btn:hover::after {
+  left: 130%;
+}
+
+.royal-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.royal-btn-outline {
+  background: transparent;
+  color: var(--gold-light);
+  border: 1.5px solid var(--gold-primary);
+  box-shadow:
+    inset 0 0 10px rgba(212, 175, 55, 0.15),
+    0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.royal-btn-outline:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-glow);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+/* Royal Parchment Scroll */
+.royal-parchment {
+  background: var(--royal-parchment-bg);
+  background-image:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.4) 0%,
+      transparent 80%
+    ),
+    linear-gradient(
+      180deg,
+      #dfcfab 0%,
+      #f7eed7 8%,
+      #fbf6ea 50%,
+      #f7eed7 92%,
+      #dfcfab 100%
+    );
+  color: var(--royal-text-dark);
+  border-radius: 12px;
+  padding: 2.2rem 1.8rem;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.5),
+    inset 0 0 35px rgba(139, 90, 43, 0.25),
+    0 0 0 2px rgba(212, 175, 55, 0.5);
+  position: relative;
+  border-left: 8px solid #a97a38;
+  border-right: 8px solid #a97a38;
+}
+
+.royal-parchment::before,
+.royal-parchment::after {
+  content: "❧";
+  font-size: 1.8rem;
+  color: #8b5a2b;
+  position: absolute;
+  opacity: 0.7;
+}
+
+.royal-parchment::before {
+  top: 10px;
+  left: 16px;
+}
+
+.royal-parchment::after {
+  bottom: 10px;
+  right: 16px;
+  transform: rotate(180deg);
+}
+
+/* Wax Seal Interaction */
+.wax-seal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: 1.5rem 0;
+  transition: transform 0.3s ease;
+}
+
+.wax-seal-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.wax-seal {
+  width: 76px;
+  height: 76px;
+  background: radial-gradient(circle at 35% 35%, #b91c1c, #7f1d1d 70%, #450a0a);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6);
+  border: 3px dashed #991b1b;
+  position: relative;
+  animation: pulseSeal 3s infinite alternate ease-in-out;
+}
+
+.wax-seal svg {
+  width: 38px;
+  height: 38px;
+  fill: #fef08a;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes pulseSeal {
+  0% {
+    box-shadow: 0 0 10px rgba(185, 28, 28, 0.4);
+  }
+  100% {
+    box-shadow:
+      0 0 25px rgba(239, 68, 68, 0.7),
+      0 0 10px rgba(255, 215, 0, 0.4);
+  }
+}
+
+/* ==========================================================================
+   FLOATING ROYAL CIRCULAR BUTTONS (Audio & View Mode Toggle)
+   ========================================================================== */
+.floating-royal-btn {
+  position: fixed;
+  z-index: 1001;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2a071d, #14020e 70%, #0d0208);
+  border: 2px solid var(--gold-primary);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.7),
+    0 0 10px rgba(212, 175, 55, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.floating-royal-btn:hover {
+  transform: scale(1.1);
+  border-color: var(--gold-glow);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.floating-royal-btn:active {
+  transform: scale(0.92);
+}
+
+/* Audio button bottom-right */
+.floating-audio-btn {
+  bottom: 22px;
+  right: 22px;
+}
+
+/* Mode toggle button bottom-left */
+.floating-mode-btn {
+  bottom: 22px;
+  left: 22px;
+}
+
+.floating-royal-btn .disc-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffd700;
+  background: radial-gradient(
+    circle,
+    #222 18%,
+    #111 25%,
+    #333 45%,
+    #181818 60%,
+    #444 65%,
+    #0d0208 100%
+  );
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.floating-royal-btn .disc-inner svg {
+  position: relative;
+  z-index: 2;
+  color: #ffd700;
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
+}
+
+/* Spinning state when audio is playing */
+.floating-audio-btn.playing {
+  box-shadow:
+    0 0 25px rgba(255, 215, 0, 0.7),
+    0 8px 24px rgba(0, 0, 0, 0.8);
+  border-color: #ffd700;
+}
+
+.floating-audio-btn.playing .disc-inner {
+  animation: spinVinyl 3.5s linear infinite;
+}
+
+/* Glow state when scroll mode is active */
+.floating-mode-btn.scroll-active {
+  border-color: var(--gold-glow);
+  box-shadow:
+    0 0 20px rgba(255, 215, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes spinVinyl {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .floating-royal-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .floating-audio-btn {
+    bottom: 16px;
+    right: 14px;
+  }
+  .floating-mode-btn {
+    bottom: 16px;
+    left: 14px;
+  }
+  .floating-royal-btn .disc-inner svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--royal-dark-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold-dark), var(--gold-primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-glow);
+}
+
+/* ==========================================================================
+   FLORAL CALLIGRAPHY CORNER ORNAMENTS (ইসলামিক শাহী পুষ্পল নকশা)
+   ========================================================================== */
+.window-corner-ornament {
+  position: fixed;
+  z-index: 99;
+  pointer-events: none;
+  width: 80px;
+  height: 80px;
+  opacity: 0.85;
+  animation: floralAura 4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+  transition: opacity 0.3s ease;
+}
+
+.window-corner-ornament.top-left {
+  top: 0;
+  left: 0;
+}
+
+.window-corner-ornament.top-right {
+  top: 0;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.window-corner-ornament.bottom-left {
+  bottom: 0;
+  left: 0;
+  transform: scaleY(-1);
+}
+
+.window-corner-ornament.bottom-right {
+  bottom: 0;
+  right: 0;
+  transform: scale(-1, -1);
+}
+
+.window-corner-ornament svg {
+  width: 100%;
+  height: 100%;
+  fill: url(#goldLinear);
+}
+
+@keyframes floralAura {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.35));
+    opacity: 0.75;
+  }
+  100% {
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.75));
+    opacity: 0.95;
+  }
+}
+
+/* Card & Scroll Corner Flourishes */
+.card-corner-flourish {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  opacity: 0.65;
+  z-index: 3;
+}
+
+.card-corner-flourish.tl {
+  top: 6px;
+  left: 6px;
+}
+
+.card-corner-flourish.tr {
+  top: 6px;
+  right: 6px;
+  transform: scaleX(-1);
+}
+
+.card-corner-flourish.bl {
+  bottom: 6px;
+  left: 6px;
+  transform: scaleY(-1);
+}
+
+.card-corner-flourish.br {
+  bottom: 6px;
+  right: 6px;
+  transform: scale(-1, -1);
+}
+
+.card-corner-flourish svg {
+  width: 100%;
+  height: 100%;
+  fill: url(#goldLinear);
+}
+
+/* Responsive scaling for window corner ornaments */
+@media (min-width: 768px) {
+  .window-corner-ornament {
+    width: 120px;
+    height: 120px;
+  }
+  .card-corner-flourish {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .window-corner-ornament {
+    width: 145px;
+    height: 145px;
+  }
+}
