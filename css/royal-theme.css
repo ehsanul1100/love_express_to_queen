@@ -133,6 +133,11 @@ body {
   transform: scale(1);
 }
 
+/* Pause animations in inactive backdrop layers to save GPU/CPU cycles */
+.scenery-layer:not(.scenery-active) * {
+  animation-play-state: paused !important;
+}
+
 .scenery-svg {
   width: 100%;
   height: 100%;
@@ -705,9 +710,16 @@ body {
 }
 
 /* ==========================================================================
-   MOBILE HIGH-PERFORMANCE 60FPS ACCELERATION
+   MOBILE HIGH-PERFORMANCE 60FPS ACCELERATION & SAFE AREA
    ========================================================================== */
 @media (max-width: 768px) {
+  body {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
   .royal-card,
   .hero-glass-card,
   .royal-parchment,
@@ -716,15 +728,36 @@ body {
   .private-vault,
   .section-header,
   .cinematic-hud {
-    backdrop-filter: blur(10px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(10px) saturate(160%) !important;
+    backdrop-filter: blur(8px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
     transform: translateZ(0);
     contain: paint;
   }
 
   .window-corner-ornament {
-    width: 55px;
-    height: 55px;
+    width: 48px;
+    height: 48px;
+    opacity: 0.55;
     filter: none !important;
+  }
+
+  .card-corner-flourish {
+    width: 36px;
+    height: 36px;
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .window-corner-ornament {
+    width: 38px;
+    height: 38px;
+    opacity: 0.45;
+  }
+
+  .card-corner-flourish {
+    width: 28px;
+    height: 28px;
+    opacity: 0.4;
   }
 }

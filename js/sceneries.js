@@ -7,7 +7,7 @@
  */
 
 (function () {
-  'use strict';
+  "use strict";
 
   const sceneriesMarkup = `
 <!-- ==========================================================================
@@ -73,9 +73,8 @@
             <circle
               cx="0"
               cy="0"
-              r="38"
-              fill="rgba(255, 235, 170, 0.15)"
-              filter="blur(8px)"
+              r="42"
+              fill="rgba(255, 235, 170, 0.12)"
             />
             <path
               d="M-15,-30 A 35,35 0 0,0 20,25 A 28,28 0 1,1 -15,-30 Z"
@@ -345,8 +344,7 @@
             />
             <path
               d="M520,740 Q720,710 920,740 Q720,770 520,740 Z"
-              fill="rgba(255, 235, 170, 0.25)"
-              filter="blur(4px)"
+              fill="rgba(255, 235, 170, 0.18)"
             />
             <path
               d="M600,750 Q720,735 840,750"
@@ -870,42 +868,45 @@
   let sceneryLayers = [];
 
   function initSceneries() {
-    if (document.getElementById('royal-scenery-stage')) {
-      sceneryLayers = document.querySelectorAll('.scenery-layer');
+    if (document.getElementById("royal-scenery-stage")) {
+      sceneryLayers = document.querySelectorAll(".scenery-layer");
       return;
     }
 
-    const stageWrapper = document.createElement('div');
+    const stageWrapper = document.createElement("div");
     stageWrapper.innerHTML = sceneriesMarkup.trim();
     const stageEl = stageWrapper.firstElementChild;
 
-    const particleCanvas = document.getElementById('particle-canvas');
+    const particleCanvas = document.getElementById("particle-canvas");
     if (particleCanvas && particleCanvas.parentNode) {
-      particleCanvas.parentNode.insertBefore(stageEl, particleCanvas.nextSibling);
+      particleCanvas.parentNode.insertBefore(
+        stageEl,
+        particleCanvas.nextSibling,
+      );
     } else {
       document.body.prepend(stageEl);
     }
 
-    sceneryLayers = document.querySelectorAll('.scenery-layer');
+    sceneryLayers = document.querySelectorAll(".scenery-layer");
   }
 
   function setChapter(index) {
     if (!sceneryLayers || !sceneryLayers.length) {
-      sceneryLayers = document.querySelectorAll('.scenery-layer');
+      sceneryLayers = document.querySelectorAll(".scenery-layer");
     }
     sceneryLayers.forEach((layer, idx) => {
-      layer.classList.toggle('scenery-active', idx === index);
+      layer.classList.toggle("scenery-active", idx === index);
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSceneries);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSceneries);
   } else {
     initSceneries();
   }
 
   window.RoyalSceneries = {
     init: initSceneries,
-    setChapter: setChapter
+    setChapter: setChapter,
   };
 })();
