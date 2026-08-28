@@ -281,6 +281,43 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.remove("scroll-mode");
   goToChapter(0, false);
 
+  // 0. Royal Palanquin ("শাহী ডুলি / পালকি") Sliding Entrance Portal Controller
+  const palanquinPortal = document.getElementById("royal-palanquin-portal");
+  const palanquinRoseTrigger = document.getElementById(
+    "palanquin-rose-trigger",
+  );
+
+  if (palanquinPortal && palanquinRoseTrigger) {
+    const openPalanquin = (e) => {
+      if (e) e.preventDefault();
+      if (palanquinPortal.classList.contains("palanquin-opened")) return;
+
+      palanquinPortal.classList.add("palanquin-opened");
+
+      // Start soft romantic music-box melody smoothly
+      if (!audioSuite.isPlaying) {
+        audioSuite.play();
+      }
+
+      // Celebratory shower of roses & golden stardust
+      if (particles) {
+        particles.showerLove(55);
+      }
+
+      // Cleanly hide portal from layout after transition completes
+      setTimeout(() => {
+        palanquinPortal.style.display = "none";
+      }, 1500);
+    };
+
+    palanquinRoseTrigger.addEventListener("click", openPalanquin);
+    palanquinRoseTrigger.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        openPalanquin(e);
+      }
+    });
+  }
+
   // 4. Floating Audio Single Button Control (Spinning when playing / Static when paused)
   const audioBtn =
     document.getElementById("floating-audio-btn") ||

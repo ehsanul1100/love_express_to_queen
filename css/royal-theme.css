@@ -761,3 +761,448 @@ body {
     opacity: 0.4;
   }
 }
+
+/* ==========================================================================
+   ROYAL PALANQUIN ("শাহী ডুলি / পালকি") SLIDING PORTAL STYLES
+   ========================================================================== */
+.royal-palanquin-portal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a0108;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.8s ease 0.5s,
+    visibility 0.8s ease 0.5s;
+}
+
+.royal-palanquin-portal.palanquin-opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Door Panel Base */
+.palanquin-door-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 10;
+  transition:
+    transform 1.3s cubic-bezier(0.77, 0, 0.175, 1),
+    opacity 0.9s ease;
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+/* Left Door Wing */
+.palanquin-door-panel.palanquin-left {
+  left: 0;
+  background:
+    radial-gradient(circle at 85% 45%, #420b2d 0%, #1e0415 50%, #0c0108 100%),
+    linear-gradient(90deg, #12020d 0%, #29071c 100%);
+  border-right: 2px solid var(--gold-primary);
+  box-shadow:
+    inset -8px 0 35px rgba(0, 0, 0, 0.85),
+    inset 0 0 45px rgba(63, 11, 42, 0.4),
+    0 0 25px rgba(0, 0, 0, 0.9);
+}
+
+/* Right Door Wing */
+.palanquin-door-panel.palanquin-right {
+  right: 0;
+  background:
+    radial-gradient(circle at 15% 45%, #420b2d 0%, #1e0415 50%, #0c0108 100%),
+    linear-gradient(270deg, #12020d 0%, #29071c 100%);
+  border-left: 2px solid var(--gold-primary);
+  box-shadow:
+    inset 8px 0 35px rgba(0, 0, 0, 0.85),
+    inset 0 0 45px rgba(63, 11, 42, 0.4),
+    0 0 25px rgba(0, 0, 0, 0.9);
+}
+
+/* Sliding Open Physics */
+.royal-palanquin-portal.palanquin-opened .palanquin-door-panel.palanquin-left {
+  transform: translateX(-101%);
+  opacity: 0.15;
+}
+
+.royal-palanquin-portal.palanquin-opened .palanquin-door-panel.palanquin-right {
+  transform: translateX(101%);
+  opacity: 0.15;
+}
+
+/* Door Filigree Corners */
+.door-ornament-corner {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.door-ornament-corner.top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.door-ornament-corner.bottom-left {
+  bottom: 12px;
+  left: 12px;
+  transform: scaleY(-1);
+}
+
+.door-ornament-corner.top-right {
+  top: 12px;
+  right: 12px;
+  transform: scaleX(-1);
+}
+
+.door-ornament-corner.bottom-right {
+  bottom: 12px;
+  right: 12px;
+  transform: scale(-1, -1);
+}
+
+.door-ornament-corner svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Decorative Mashrabiya Lattice Panel on Doors */
+.door-lattice-panel {
+  align-self: center;
+  width: 80%;
+  max-width: 220px;
+  height: 45vh;
+  margin: auto 0;
+  border: 1.5px solid rgba(212, 175, 55, 0.3);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%),
+    linear-gradient(135deg, rgba(63, 11, 42, 0.3) 0%, rgba(26, 4, 18, 0.6) 100%);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.6),
+    0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.door-lattice-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.door-lattice-symbol {
+  font-size: 2.5rem;
+  color: var(--gold-primary);
+  opacity: 0.35;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+
+/* Top Royal Palanquin Canopy */
+.palanquin-top-canopy {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  z-index: 25;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 4, 21, 0.95) 0%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.royal-palanquin-portal.palanquin-opened .palanquin-top-canopy {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.canopy-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px;
+  background: rgba(18, 2, 13, 0.85);
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.canopy-title {
+  font-family: var(--font-bangla-heading);
+  font-size: 0.88rem;
+  color: var(--gold-light);
+  letter-spacing: 1px;
+}
+
+.canopy-flourish {
+  color: var(--gold-primary);
+  font-size: 0.75rem;
+}
+
+/* Center Blooming Rose Trigger & Invitation */
+.palanquin-rose-trigger {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  padding: 1.5rem 1rem;
+  max-width: 90vw;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.5s ease;
+  touch-action: manipulation;
+}
+
+.royal-palanquin-portal.palanquin-opened .palanquin-rose-trigger {
+  transform: scale(1.25);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.palanquin-greeting-top {
+  font-family: var(--font-bangla-heading);
+  font-size: 1.25rem;
+  margin-bottom: 1.1rem;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  letter-spacing: 0.5px;
+}
+
+/* Glowing Rose Medallion Halo */
+.rose-medallion-halo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.rose-medallion-halo::before {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(225, 29, 72, 0.4) 0%,
+    rgba(212, 175, 55, 0.2) 50%,
+    transparent 70%
+  );
+  filter: blur(12px);
+  animation: roseAuraPulse 3s ease-in-out infinite alternate;
+}
+
+.rose-medallion-disc {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #3d0725, #1d0312 65%, #0d0108);
+  border: 2.5px solid var(--gold-glow);
+  box-shadow:
+    0 0 30px rgba(255, 215, 0, 0.5),
+    0 10px 25px rgba(0, 0, 0, 0.9),
+    inset 0 0 15px rgba(225, 29, 72, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  animation: roseDiscPulse 3s ease-in-out infinite alternate;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.palanquin-rose-trigger:hover .rose-medallion-disc {
+  transform: scale(1.08) rotate(5deg);
+  border-color: #ffffff;
+  box-shadow:
+    0 0 40px rgba(255, 215, 0, 0.8),
+    0 0 25px rgba(244, 63, 94, 0.7);
+}
+
+.palanquin-rose-trigger:active .rose-medallion-disc {
+  transform: scale(0.95);
+}
+
+.rose-svg-icon {
+  width: 74px;
+  height: 74px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+@keyframes roseAuraPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0.9;
+  }
+}
+
+@keyframes roseDiscPulse {
+  0% {
+    box-shadow:
+      0 0 20px rgba(255, 215, 0, 0.4),
+      0 8px 20px rgba(0, 0, 0, 0.8);
+  }
+  100% {
+    box-shadow:
+      0 0 35px rgba(255, 215, 0, 0.75),
+      0 0 20px rgba(225, 29, 72, 0.5),
+      0 12px 28px rgba(0, 0, 0, 0.9);
+  }
+}
+
+/* Touch Action Badge */
+.palanquin-touch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.4rem;
+  background: rgba(22, 4, 18, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: 30px;
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(212, 175, 55, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.palanquin-rose-trigger:hover .palanquin-touch-badge {
+  background: var(--gold-gradient);
+  border-color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+}
+
+.palanquin-rose-trigger:hover .palanquin-touch-badge .touch-text {
+  color: var(--royal-dark-900);
+}
+
+.touch-icon {
+  font-size: 1.1rem;
+}
+
+.touch-text {
+  font-family: var(--font-bangla-heading);
+  font-size: 1.05rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.palanquin-subtitle-bottom {
+  margin-top: 0.85rem;
+  font-size: 0.92rem;
+  color: #f7eed7;
+  opacity: 0.85;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+/* Mobile Responsiveness for Palanquin Doors */
+@media (max-width: 600px) {
+  .palanquin-door-panel {
+    padding: 1rem;
+  }
+
+  .door-ornament-corner {
+    width: 45px;
+    height: 45px;
+    opacity: 0.5;
+  }
+
+  .door-lattice-panel {
+    width: 85%;
+    max-width: 140px;
+    height: 38vh;
+  }
+
+  .door-lattice-symbol {
+    font-size: 1.8rem;
+  }
+
+  .rose-medallion-disc {
+    width: 88px;
+    height: 88px;
+  }
+
+  .rose-svg-icon {
+    width: 62px;
+    height: 62px;
+  }
+
+  .palanquin-greeting-top {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .touch-text {
+    font-size: 0.94rem;
+  }
+
+  .palanquin-touch-badge {
+    padding: 0.55rem 1.1rem;
+  }
+
+  .palanquin-subtitle-bottom {
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .rose-medallion-disc {
+    width: 78px;
+    height: 78px;
+  }
+
+  .rose-svg-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .palanquin-greeting-top {
+    font-size: 1rem;
+  }
+
+  .touch-text {
+    font-size: 0.88rem;
+  }
+}
