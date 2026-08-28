@@ -12,12 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 3. Cinematic Royal Chapters Configuration
   const chapters = [
-    { title: "১. শাহী তোরণ ও আগমন", id: "chamber-gate" },
-    { title: "২. সুলতানের প্রেমপত্র", id: "chamber-proclamation" },
-    { title: "৩. রুহানী কাব্যসুধা", id: "chamber-poetry" },
-    { title: "৪. মালিকার রূপ ও গুণ", id: "chamber-virtues" },
-    { title: "৫. প্রেমের শাহী অলিন্দ", id: "chamber-vault" },
-    { title: "৬. সুলতানের চিরন্তন ওয়াদা", id: "chamber-decree" },
+    { title: "শাহী তোরণ ও আগমন", id: "chamber-gate" },
+    { title: "সুলতানের প্রেমপত্র", id: "chamber-proclamation" },
+    { title: "রুহানী কাব্যসুধা", id: "chamber-poetry" },
+    { title: "মালিকার রূপ ও গুণ", id: "chamber-virtues" },
+    { title: "প্রেমের শাহী অলিন্দ", id: "chamber-vault" },
+    { title: "সুলতানের চিরন্তন ওয়াদা", id: "chamber-decree" },
   ];
 
   let currentChapterIndex = 0;
